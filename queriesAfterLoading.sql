@@ -5,3 +5,5 @@ SELECT (CourseOffers.CourseOfferId, CourseOffers.CourseId, CourseOffers.Year, Co
     (CourseOffers.CourseOfferId = TeacherAssignmentsToCourses.CourseOfferId)
   INNER JOIN Teachers on (TeacherAssignmentsToCourses.TeacherId = Teachers.TeacherId)
   WHERE CourseOffers.CourseOfferId = '1';
+
+SELECT AVG(Grade) FROM  CourseRegistrations INNER JOIN StudentRegistrationsToDegrees on (StudentRegistrationsToDegrees.StudentRegistrationId = CourseRegistrations.StudentRegistrationId) WHERE StudentRegistrationsToDegrees.StudentRegistrationId = 140;
