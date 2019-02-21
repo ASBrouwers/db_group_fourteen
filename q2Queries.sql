@@ -31,7 +31,8 @@ SELECT studentid, COUNT(courseOfferId) as NrExcellent FROM
                ORDER BY courseOfferId, grade DESC) AS s
 GROUP BY studentid) AS t
 WHERE nrExcellent >= 2;
-    
--- Q7
+
+-- Q7 Mitchell
+SELECT StudentRegistrationsToDegrees.DegreeId, Students.BirthyearStudent, Students.Gender, AVG(CourseRegistrations.Grade) FROM StudentRegistrationsToDegrees INNER JOIN Students on (StudentRegistrationsToDegrees.StudentId = Students.StudentId) INNER JOIN CourseRegistrations on (StudentRegistrationsToDegrees.StudentRegistrationId = CourseRegistrations.StudentRegistrationId) GROUP BY (StudentRegistrationsToDegrees.DegreeId, Students.BirthyearStudent, Students.Gender);
 
 -- Q8
