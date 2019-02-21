@@ -33,6 +33,7 @@ GROUP BY studentid) AS t
 WHERE nrExcellent >= 2;
 
 -- Q7 Mitchell
+-- check for actieve studenten moet nog toegevoegd worden
 SELECT StudentRegistrationsToDegrees.DegreeId, Students.BirthyearStudent, Students.Gender, AVG(CourseRegistrations.Grade) FROM StudentRegistrationsToDegrees INNER JOIN Students on (StudentRegistrationsToDegrees.StudentId = Students.StudentId) INNER JOIN CourseRegistrations on (StudentRegistrationsToDegrees.StudentRegistrationId = CourseRegistrations.StudentRegistrationId) GROUP BY (StudentRegistrationsToDegrees.DegreeId, Students.BirthyearStudent, Students.Gender);
 
 -- Q8
