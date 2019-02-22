@@ -7,7 +7,7 @@ SELECT (CourseOffers.CourseOfferId, CourseOffers.CourseId, CourseOffers.Year, Co
   INNER JOIN Teachers on (TeacherAssignmentsToCourses.TeacherId = Teachers.TeacherId)
   WHERE CourseOffers.CourseOfferId = 1;
 
--- Query II (not correct yet: 0 rows)
+-- Query II
 SELECT (CourseOffers.*, Students.*, Degrees.*) FROM 
   CourseOffers
   INNER JOIN StudentAssistants on (CourseOffers.CourseOfferId = StudentAssistants.CourseOfferId)
