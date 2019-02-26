@@ -10,9 +10,21 @@ SELECT Courses.CourseName, CourseRegistrations.Grade FROM Students INNER JOIN St
 -- Q4 Fabienne
 
 -- Q5 Anne
+SELECT CourseId, 100 * cast(num as float)/denom AS percentagePassing
+FROM (SELECT CourseId, COUNT(case when Grade >= 5 then 1 end) AS num, COUNT(Grade) AS denom
+          FROM course_reg_offer_join
+          WHERE Grade IS NOT NULL
+GROUP BY (CourseId)) AS s;
 
 -- Q6 Anne
-
+SELECT studentid, nrExcellent as nrOfCoursesWhereExcellent FROM (
+SELECT studentid, COUNT(courseOfferId) as NrExcellent FROM
+    (SELECT DISTINCT ON (courseOfferId)  studentId, courseOfferId 
+               FROM course_reg_offer_join
+               ORDER BY courseOfferId, grade DESC) AS s
+GROUP BY studentid) AS t
+WHERE nrExcellent >= 2;
+    
 -- Q7
 
 -- Q8
