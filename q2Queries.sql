@@ -6,8 +6,15 @@ SELECT Courses.CourseName, CourseRegistrations.Grade FROM Students INNER JOIN St
 -- Q2 Mitchell
 
 -- Q3 Fabienne
+SELECT Degrees.DegreeId, (cast(SUM(CASE WHEN Students.Gender = 'F' THEN 1 ELSE 0 END) as float) / COUNT(Students.Gender))*100 as female_percent
+FROM Students INNER JOIN StudentRegistrationsToDegrees on (Students.StudentId = StudentRegistrationsToDegrees.StudentId) INNER JOIN Degrees on (StudentRegistrationsToDegrees.DegreeId = Degrees.DegreeId)
+-- WHERE clause toevoegen met conditions voor active student 
+GROUP BY Degrees.DegreeId;
 
 -- Q4 Fabienne
+SELECT (cast(SUM(CASE WHEN Students.Gender = 'F' THEN 1 ELSE 0 END) as float) / COUNT(Students.Gender))*100 as female_percent
+FROM Students INNER JOIN StudentRegistrationsToDegrees on (Students.StudentId = StudentRegistrationsToDegrees.StudentId) INNER JOIN Degrees on (StudentRegistrationsToDegrees.DegreeId = Degrees.DegreeId)
+WHERE (Degrees.Dept = %1%);
 
 -- Q5 Anne
 SELECT CourseId, 100 * cast(num as float)/denom AS percentagePassing
