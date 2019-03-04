@@ -20,6 +20,6 @@ SELECT GPAandECTSCount.StudentRegistrationId, StudentRegistrationsToDegrees.Stud
 
 -- Materialized view of all active students
 CREATE MATERIALIZED VIEW ActiveStudents AS 
-SELECT GPAandECTSCount.StudentRegistrationId, StudentRegistrationsToDegrees.StudentId, Students.Gender, StudentRegistrationsToDegrees.DegreeId
+SELECT GPAandECTSCount.StudentRegistrationId, StudentRegistrationsToDegrees.StudentId, Students.Gender, Students.BirthyearStudent, StudentRegistrationsToDegrees.DegreeId
 FROM GPAAndECTSCount INNER JOIN StudentRegistrationsToDegrees on (GPAAndECTSCount.StudentRegistrationId = StudentRegistrationsToDegrees.StudentRegistrationId) INNER JOIN Students on (StudentRegistrationsToDegrees.StudentId = Students.StudentId) INNER JOIN Degrees on (StudentRegistrationsToDegrees.DegreeId = Degrees.DegreeId)
 WHERE GPAAndECTSCount.TotalECTSAcquired < Degrees.TotalECTS;
