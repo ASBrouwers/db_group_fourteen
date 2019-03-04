@@ -23,15 +23,9 @@ FROM (SELECT CourseId, COUNT(case when Grade >= 5 then 1 end) AS num, COUNT(Grad
           FROM course_reg_offer_join
           WHERE Grade IS NOT NULL
 GROUP BY (CourseId)) AS s;
-
+		
 -- Q6 Anne
-SELECT studentid, nrExcellent as nrOfCoursesWhereExcellent FROM (
-SELECT studentid, COUNT(courseOfferId) as NrExcellent FROM
-    (SELECT DISTINCT ON (courseOfferId)  studentId, courseOfferId 
-               FROM course_reg_offer_join
-               ORDER BY courseOfferId, grade DESC) AS s
-GROUP BY studentid) AS t
-WHERE nrExcellent >= 2;
+SELECT * FROM (SELECT StudentRegistrationId, COUNT(CASE WHEN CourseRegistrations.Grade = MaxGrades.MaxGrade THEN 1 END) AS NrOfExcellentCourses FROM CourseRegistrations INNER JOIN MaxGrades ON (CourseRegistrations.CourseOfferId = MaxGrades.CourseOfferId) GROUP BY StudentRegistrationId) AS s WHERE nrOfExcellentCourses >= 2;
 
 -- Q7 Mitchell
 -- check for actieve studenten moet nog toegevoegd worden
