@@ -1,12 +1,5 @@
-ALTER TABLE Students ADD PRIMARY KEY (StudentId);
 ALTER TABLE CourseRegistrations ADD PRIMARY KEY (CourseOfferId, StudentRegistrationId);
-ALTER TABLE StudentRegistrationsToDegrees ADD PRIMARY KEY (StudentRegistrationId);
 CREATE INDEX idx_courseRegs ON CourseRegistrations(CourseOfferId);
-ALTER TABLE CourseOffers ADD PRIMARY KEY (CourseOfferId);
-ALTER TABLE Degrees ADD PRIMARY KEY (DegreeId);
-ALTER TABLE Courses ADD PRIMARY KEY (CourseId);
-ALTER TABLE StudentAssistants ADD PRIMARY KEY (CourseOfferId, StudentRegistrationId);
-
 
 -- Small MV for max grade per course offer
 CREATE MATERIALIZED VIEW MaxGrades AS SELECT CourseRegistrations.CourseOfferId, MAX(Grade) AS MaxGrade FROM CourseRegistrations JOIN CourseOffers ON (CourseOffers.CourseOfferId = CourseRegistrations.CourseOfferId) WHERE Year = 2018 AND Quartile = 1 GROUP BY CourseRegistrations.CourseOfferId;
