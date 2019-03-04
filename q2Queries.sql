@@ -18,12 +18,8 @@ FROM Students INNER JOIN StudentRegistrationsToDegrees on (Students.StudentId = 
 WHERE (Degrees.Dept = %1%);
 
 -- Q5 Anne
-SELECT CourseId, cast(num as float)/denom AS percentagePassing
-FROM (SELECT CourseId, COUNT(case when Grade >= 5 then 1 end) AS num, COUNT(Grade) AS denom
-          FROM course_reg_offer_join
-          WHERE Grade IS NOT NULL
-GROUP BY (CourseId)) AS s;
-		
+SELECT CourseId, COUNT(Grade), COUNT(CASE WHEN Grade >= 5 THEN 1 END), CAST(COUNT(CASE WHEN Grade >= 5 THEN 1 END) AS FLOAT) / COUNT(Grade) AS percentagePassing FROM CourseRegistrations INNER JOIN CourseOffers ON (CourseRegistrations.CourseOfferId = CourseOffers.CourseOfferId) WHERE Grade IS NOT NULL GROUP BY CourseId;
+																					  
 -- Q6 Anne
 SELECT * FROM (SELECT StudentRegistrationId, COUNT(CASE WHEN CourseRegistrations.Grade = MaxGrades.MaxGrade THEN 1 END) AS NrOfExcellentCourses FROM CourseRegistrations INNER JOIN MaxGrades ON (CourseRegistrations.CourseOfferId = MaxGrades.CourseOfferId) GROUP BY StudentRegistrationId) AS s WHERE nrOfExcellentCourses >= 2;
 
