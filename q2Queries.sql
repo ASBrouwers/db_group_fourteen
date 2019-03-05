@@ -24,7 +24,7 @@ SELECT CourseId, COUNT(Grade), COUNT(CASE WHEN Grade >= 5 THEN 1 END), CAST(COUN
 SELECT * FROM (SELECT StudentRegistrationId, COUNT(CASE WHEN CourseRegistrations.Grade = MaxGrades.MaxGrade THEN 1 END) AS NrOfExcellentCourses FROM CourseRegistrations INNER JOIN MaxGrades ON (CourseRegistrations.CourseOfferId = MaxGrades.CourseOfferId) GROUP BY StudentRegistrationId) AS s WHERE nrOfExcellentCourses >= 2;
 
 -- Q7 Mitchell
-SELECT StudentRegistrationsToDegrees.DegreeId, ActiveStudents.BirthyearStudent, ActiveStudents.Gender, AVG(CourseRegistrations.Grade) FROM StudentRegistrationsToDegrees INNER JOIN ActiveStudents on (StudentRegistrationsToDegrees.StudentId = ActiveStudents.StudentId) INNER JOIN CourseRegistrations on (StudentRegistrationsToDegrees.StudentRegistrationId = CourseRegistrations.StudentRegistrationId) GROUP BY (StudentRegistrationsToDegrees.DegreeId, ActiveStudents.BirthyearStudent, ActiveStudents.Gender);
+SELECT ActiveStudents.DegreeId, ActiveStudents.BirthyearStudent, ActiveStudents.Gender, AVG(CourseRegistrations.Grade) FROM ActiveStudents INNER JOIN CourseRegistrations on (ActiveStudents.StudentRegistrationId = CourseRegistrations.StudentRegistrationId) GROUP BY (ActiveStudents.DegreeId, ActiveStudents.BirthyearStudent, ActiveStudents.Gender);
 
 -- Q8 Fabienne
 SELECT Courses.CourseName, CourseOffers.Year, CourseOffers.Quartile
