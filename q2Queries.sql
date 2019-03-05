@@ -28,7 +28,7 @@ SELECT * FROM (SELECT StudentRegistrationId, COUNT(CASE WHEN CourseRegistrations
 SELECT StudentRegistrationsToDegrees.DegreeId, Students.BirthyearStudent, Students.Gender, AVG(CourseRegistrations.Grade) FROM StudentRegistrationsToDegrees INNER JOIN Students on (StudentRegistrationsToDegrees.StudentId = Students.StudentId) INNER JOIN CourseRegistrations on (StudentRegistrationsToDegrees.StudentRegistrationId = CourseRegistrations.StudentRegistrationId) GROUP BY (StudentRegistrationsToDegrees.DegreeId, Students.BirthyearStudent, Students.Gender);
 
 -- Q8 Fabienne
-SELECT Courses.CourseName, CourseOffers.Year, CourseOffers.Quartile
+SELECT CourseName, Year, Quartile
 FROM (SELECT Courses.CourseId, Courses.CourseName, CourseOffers.Year, CourseOffers.Quartile FROM Courses INNER JOIN CourseOffers on (Courses.CourseId = CourseOffers.CourseId) INNER JOIN CourseRegistrations on (CourseOffers.CourseOfferId = CourseRegistrations.CourseOfferId) INNER JOIN StudentAssistants on (CourseOffers.CourseOfferId = StudentAssistants.CourseOfferId)
 GROUP BY Courses.CourseId, CourseOffers.Year, CourseOffers.Quartile
 HAVING COUNT(CourseRegistrations.CourseOfferId) / 50 < COUNT(StudentAssistants.CourseOfferId)) as s;
