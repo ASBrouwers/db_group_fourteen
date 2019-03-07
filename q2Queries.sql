@@ -27,9 +27,8 @@ SELECT * FROM (SELECT StudentRegistrationId, COUNT(CASE WHEN CourseRegistrations
 SELECT StudentRegistrationsToDegrees.DegreeId, ActiveStudents.BirthyearStudent, ActiveStudents.Gender, AVG(CourseRegistrations.Grade) FROM StudentRegistrationsToDegrees INNER JOIN ActiveStudents on (StudentRegistrationsToDegrees.StudentId = ActiveStudents.StudentId) INNER JOIN CourseRegistrations on (StudentRegistrationsToDegrees.StudentRegistrationId = CourseRegistrations.StudentRegistrationId) GROUP BY (StudentRegistrationsToDegrees.DegreeId, ActiveStudents.BirthyearStudent, ActiveStudents.Gender);
 
 -- Q8 Fabienne
--- Does not include the courses which have 0 StudentAssistants
 SELECT Courses.CourseName, CourseOffers.Year, CourseOffers.Quartile
-FROM Courses INNER JOIN CourseOffers on (Courses.CourseId = CourseOffers.CourseId) INNER JOIN NrOfStudents on (CourseOffers.CourseOfferId = NrOfStudents.CourseOfferId) INNER JOIN NrOfAssistants on (CourseOffers.CourseOfferId = NrOfAssistants.CourseOfferId)
-WHERE NrOfStudents.NrOfStudents / 50 > NrOfAssistants.NrOfAssistants;
+FROM Courses INNER JOIN CourseOffers on (Courses.CourseId = CourseOffers.CourseId) INNER JOIN NrOfStudents on (CourseOffers.CourseOfferId = NrOfStudents.CourseOfferId) LEFT OUTER JOIN NrOfAssistants on (CourseOffers.CourseOfferId = NrOfAssistants.CourseOfferId)
+WHERE NrOfStudents.NrOfStudents / 50 > NrOfAssistants.NrOfAssistants OR NrOfAssistants IS NULL;
 
 
