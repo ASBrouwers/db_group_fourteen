@@ -20,3 +20,15 @@ CREATE MATERIALIZED VIEW ActiveStudents AS
 SELECT GPAandECTSCount.StudentRegistrationId, StudentRegistrationsToDegrees.StudentId, Students.Gender, Students.BirthyearStudent, StudentRegistrationsToDegrees.DegreeId
 FROM GPAAndECTSCount INNER JOIN StudentRegistrationsToDegrees on (GPAAndECTSCount.StudentRegistrationId = StudentRegistrationsToDegrees.StudentRegistrationId) INNER JOIN Students on (StudentRegistrationsToDegrees.StudentId = Students.StudentId) INNER JOIN Degrees on (StudentRegistrationsToDegrees.DegreeId = Degrees.DegreeId)
 WHERE GPAAndECTSCount.TotalECTSAcquired < Degrees.TotalECTS;
+
+-- Materialized view of number of students per courseoffer
+CREATE MATERIALIZED VIEW NrOfStudents AS
+SELECT CourseOffers.CourseOfferId, COUNT(CourseRegistrations.StudentRegistrationId) AS NrOfStudents
+FROM CourseOffers INNER JOIN CourseRegistrations on (CourseOffers.CourseOfferId = CourseRegistrations.CourseOfferId)
+GROUP BY CourseOffers.CourseOfferId;
+
+-- Materialized view of number of studentassistants per courseoffer
+CREATE MATERIALIZED VIEW NrOfAssistants AS
+SELECT CourseOffers.CourseOfferId, COUNT(StudentAssistants.StudentRegistrationId) AS NrOfAssistants
+FROM CourseOffers INNER JOIN StudentAssistants on (CourseOffers.CourseOfferId = StudentAssistants.CourseOfferId)
+GROUP BY CourseOffers.CourseOfferId;
