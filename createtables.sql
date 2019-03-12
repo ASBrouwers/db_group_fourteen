@@ -6,4 +6,5 @@ CREATE UNLOGGED TABLE Courses(CourseId int PRIMARY KEY, CourseName varchar(50), 
 CREATE UNLOGGED TABLE CourseOffers(CourseOfferId int PRIMARY KEY, CourseId int, Year int, Quartile int);
 CREATE UNLOGGED TABLE TeacherAssignmentsToCourses(CourseOfferId int, TeacherId int);
 CREATE UNLOGGED TABLE StudentAssistants(CourseOfferId int, StudentRegistrationId int, PRIMARY KEY(CourseOfferId,StudentRegistrationId));
-CREATE UNLOGGED TABLE CourseRegistrations(CourseOfferId int, StudentRegistrationId int, Grade int);
+CREATE UNLOGGED TABLE CourseRegistrations(CourseOfferId int, StudentRegistrationId int, StudentId int, Grade int);
+CREATE UNLOGGED TABLE TempCourseRegistrations(CourseOfferId int, StudentRegistrationId int, Grade int);																								  
